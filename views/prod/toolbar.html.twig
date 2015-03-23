@@ -1,0 +1,58 @@
+{% extends "@phraseanet/prod/toolbar.html.twig" %}
+
+{% block toolbar %}
+    {{ parent() }}
+
+    <span class="classicButton">
+        <div class="btn-group">
+            <button class="TOOL_do_something_btn results_window btn btn-inverse">
+                <img src="{{ plugin_asset('template-plugin', 'img/btn.png') }}" height="16" width="16"/> {{ 'Do something' | trans }}
+            </button>
+            <button class="trigger btn btn-inverse dropdown-toggle"  data-toggle="dropdown"><span class="caret"></span></button>
+            <ul class="submenu dropdown-menu">
+                <li>
+                    <a class="TOOL_do_something_else_btn results_window">
+                        <img src="{{ plugin_asset('template-plugin', 'img/btn2.png') }}" height="16" width="16"/>
+                        {{ 'Do something else' | trans }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </span>
+    <script type="text/javascript" title="do_something_btn">
+        $('.TOOL_do_something_btn').live('click', function () {
+            var $lst = p4.Results.Selection.serialize();
+
+            if ($lst.split(';').length === 0) {
+                alert('Please select at least one record.');
+
+                return;
+            }
+
+            var $buttons = {};
+
+            $buttons['Do something'] = function () {
+                // Do something here
+
+                // close 1st modal
+                p4.Dialog.Close(1);
+            };
+
+            var $dialog = p4.Dialog.Create({
+                size: 'Medium',
+                title: 'Do something',
+                buttons: $buttons
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "../do-something/",
+                dataType: 'html',
+                data: {lst: $lst},
+                success: function (data) {
+                    $dialog.setContent(data);
+                }
+            });
+        });
+    </script>
+{% endblock %}

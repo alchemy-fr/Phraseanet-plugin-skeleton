@@ -1,0 +1,6 @@
+<h3>Vous avez sélectionné {{ records.count }} document(s)</h3>
+<ul>
+    {% for record in records %}
+        <li>{{ record.originalName }}</li>
+    {% endfor %}
+</ul>
