@@ -1,12 +1,12 @@
 {
-    "name"        : "phraseanet/template-plugin",
-    "description" : "Template plugin for manipulating Phraseanet records",
-    "license"     : "MIT",
+    "name": "phrasenet/skeleton",
+    "description": "Skeleton Plugin",
+    "license": "MIT",
     "require": {},
     "require-dev": {},
     "autoload": {
-        "psr-0": {
-            "Alchemy"     : "src"
+        "psr-4": {
+            "Alchemy\\SkeletonPlugin\\": "src"
         }
     }
 }
