@@ -3,7 +3,7 @@
 
 ## License
 
-Phraseanet Plugin Skeletor is released under the MIT license
+Phraseanet Plugin Skeleton is released under the MIT license
 
 synopsis
 demonstrate how to make an interface plugin for prod IHM.
