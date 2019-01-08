@@ -1,9 +1,9 @@
 {
-    "name": "template-plugin",
+    "name": "Phraseanet-plugin-skeleton",
     "description" : "A template plugin for manipulating records",
     "keywords"    : ["template", "records", "action"],
     "license"     : "MIT",
-    "version"     : "1.0.0",
+    "version"     : "4.0.0",
     "minimum-phraseanet-version": "3.9",
     "maximum-phraseanet-version": "4.0.100",
     "twig-paths": ["views"],
