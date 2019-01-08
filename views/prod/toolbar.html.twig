@@ -20,29 +20,45 @@
         </div>
     </span>
     <script type="text/javascript" title="do_something_btn">
-        $('.TOOL_do_something_btn').live('click', function () {
-            var $lst = p4.Results.Selection.serialize();
-
-            if ($lst.split(';').length === 0) {
-                alert('Please select at least one record.');
-
-                return;
-            }
-
+        $('.TOOL_do_something_btn').on('click', function (event) {
+            event.preventDefault();
             var $buttons = {};
-
-            $buttons['Do something'] = function () {
-                // Do something here
-
-                // close 1st modal
-                p4.Dialog.Close(1);
-            };
-
-            var $dialog = p4.Dialog.Create({
+            var $options = {
                 size: 'Medium',
                 title: 'Do something',
                 buttons: $buttons
-            });
+            };
+            // for Phraseanet v4.0
+            if(p4.Results) {
+                var $lst = p4.Results.Selection.serialize();
+                if ($lst.length === 0) {
+                    alert('Please select at least one record.');
+                    return;
+                }
+                $buttons['Do something'] = function () {
+                    // Do something here
+
+                    // close 1st modal
+                    p4.Dialog.Close(1);
+                };
+                var $dialog = p4.Dialog.Create($options);
+            }
+
+            // for Phraseanet v4.1 and up
+            else {
+                var $lst = searchResult.selection.serialize();
+                if ($lst.length === 0) {
+                    alert('Please select at least one record.');
+                    return;
+                }
+                $buttons['Do something'] = function () {
+                    // Do something here
+
+                    // close 1st modal
+                    dialog.close(2);
+                };
+                var $dialog = dialog.create({}, $options, 2);
+            }
 
             $.ajax({
                 type: "POST",
