@@ -1,7 +1,7 @@
 {
     "name": "Phraseanet-plugin-skeleton",
     "description" : "A template plugin for manipulating records",
-    "keywords"    : ["template", "records", "action"],
+    "keywords"    : ["template", "records", "action","sketeton"],
     "license"     : "MIT",
     "version"     : "4.0.0",
     "minimum-phraseanet-version": "3.9",
