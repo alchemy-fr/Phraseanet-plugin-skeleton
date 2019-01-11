@@ -20,3 +20,10 @@ In prod IHM
 Select records in answer grid and click to newbutton in action bar.
 This action open a windows in prod, with record id and collection id of selected records.
 
+## Branchs
+
+ - 4.0 for Phraseanet Version 4.0.x
+ - Master for Phraseanet version 4.1.x
+
+
+
