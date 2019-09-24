@@ -3,6 +3,7 @@
     "description" : "A template plugin for manipulating records",
     "keywords"    : ["template", "records", "action","sketeton"],
     "license"     : "MIT",
+<<<<<<< Updated upstream
     "version"     : "4.0.0",
     "minimum-phraseanet-version": "3.9",
     "maximum-phraseanet-version": "4.0.100",
@@ -10,6 +11,15 @@
     "services" : [
         {
             "class": "Alchemy\\PluginServiceProvider"
+=======
+    "version"     : "2.0.0",
+    "minimum-phraseanet-version": "4.0",
+    "maximum-phraseanet-version": "5.0",
+    "twig-paths": ["views"],
+    "services" : [
+        {
+            "class": "Alchemy\\SkeletonPlugin\\ServiceProvider"
+>>>>>>> Stashed changes
         }
     ]
 }

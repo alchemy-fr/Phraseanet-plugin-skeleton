@@ -1,0 +1,31 @@
+{% if basketName is not null %}
+    <h3>{{ 'basket_selected'|trans({'%basketName%': basketName}, text_domain) }} </h3>
+{% elseif records is not empty %}
+    <h3>{{ 'document_selected'|transchoice(records.count, [], text_domain) }}</h3>
+{% endif %}
+
+<h2>{{ 'flattened_records'|transchoice(flattenedRecords|length, [], text_domain) }}</h2>
+
+<br/>
+<br/>
+<span class="skeleton_error"></span>
+<br/>
+<br/>
+
+{% if dialog_level > 0 %}    {# only for phraseanet 4.1 #}
+<button class="btn btn-inverse SKELETON_close_btn" type="button">
+    {{ 'close'|trans({}, text_domain) }}
+</button>
+{% endif %}
+
+
+{% set config = app['phraseanet-plugin-skeleton.config'].skeleton %}
+{% set requestor = app.getAuthenticatedUser().getLogin() %}
+
+{% if dialog_level > 0 %}    {# only for phraseanet 4.1 #}
+<script type="text/javascript">
+    $('.SKELETON_close_btn').on('click', function () {
+        dialog.get({{ dialog_level }}).close();
+    });
+</script>
+{% endif %}
