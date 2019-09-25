@@ -16,6 +16,7 @@ use Silex\Application;
 use Silex\Translator;
 use Symfony\Component\HttpFoundation\Request;
 use Pimple;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ServiceProvider implements PluginProviderInterface
 {
@@ -29,16 +30,11 @@ class ServiceProvider implements PluginProviderInterface
     public function register(Application $app)
     {
         $app[self::NAME . '.config'] = $app->share(
-            function (/** @noinspection PhpUnusedParameterInspection */
-                Application $app) {
+            function (/** @noinspection PhpUnusedParameterInspection */ Application $app) {
 
                 return Config::getConfiguration();
             }
         );
-
-        // $app['skeleton.name'] = 'phraseanet-plugin-skeleton';
-        // $app['skeleton.version'] = '2.0.0';
-        $app['skeleton.assets_namespace'] = 'plugin-skeleton';
 
         $app['plugin.locale.textdomains'][self::NAME] = __DIR__ . '/../../locale';
 
@@ -57,30 +53,29 @@ class ServiceProvider implements PluginProviderInterface
         );
 
 
-        $app['skeleton.actionbar'] = $app->share(
-            function (PhraseaApplication $app) {
+        $app[self::NAME . '.actionbar'] = $app->share(
+            function (/** @noinspection PhpUnusedParameterInspection */ PhraseaApplication $app) {
                 return new ActionBarPlugin(
                     self::NAME
                 );
             }
         );
 
-        $app['skeleton.workzone'] = $app->share(
-            function (PhraseaApplication $app) {
+        $app[self::NAME . '.workzone'] = $app->share(
+            function (/** @noinspection PhpUnusedParameterInspection */ PhraseaApplication $app) {
                 return new WorkZonePlugin(
                     self::NAME
                 );
             }
         );
 
-        $app['skeleton.workzone.basket.actionbar'] = $app->share(
-            function (PhraseaApplication $app) {
+        $app[self::NAME . '.workzone.basket.actionbar'] = $app->share(
+            function (/** @noinspection PhpUnusedParameterInspection */ PhraseaApplication $app) {
                 return new BasketActionBarPlugin(
                     self::NAME
                 );
             }
         );
-
 
 
         // register voters
@@ -89,11 +84,10 @@ class ServiceProvider implements PluginProviderInterface
         $this->registerConfigurationTabs($app);
 
 
-
         $app['plugin.actionbar'] = $app->share(
             $app->extend('plugin.actionbar',
                 function (\Pimple $plugins) use ($app) {
-                    $plugin = $app['skeleton.actionbar'];
+                    $plugin = $app[self::NAME . '.actionbar'];
                     $plugins[spl_object_hash($plugin)] = $plugin;
 
                     return $plugins;
@@ -102,7 +96,7 @@ class ServiceProvider implements PluginProviderInterface
         );
 
         $app['plugin.workzone'] = $app->share($app->extend('plugin.workzone', function (Pimple $plugins) use ($app) {
-            $plugin = $app['skeleton.workzone'];
+            $plugin = $app[self::NAME . '.workzone'];
 
             $plugins[spl_object_hash($plugin)] = $plugin;
 
@@ -113,7 +107,7 @@ class ServiceProvider implements PluginProviderInterface
         $app['plugin.workzone.basket.actionbar'] = $app->share(
             $app->extend('plugin.workzone.basket.actionbar',
                 function (\Pimple $plugins) use ($app) {
-                    $plugin = $app['skeleton.workzone.basket.actionbar'];
+                    $plugin = $app[self::NAME . '.workzone.basket.actionbar'];
                     $plugins[spl_object_hash($plugin)] = $plugin;
 
                     return $plugins;
@@ -133,7 +127,7 @@ class ServiceProvider implements PluginProviderInterface
         $app->post('/skeleton_2/', [$this, 'skeleton_2'])->bind('skeleton_2');
 
         // admin conf
-        $app->match('/skeleton/configuration', [$this, 'adminConfiguration'])
+        $app->match('/' . self::NAME . '/configuration', [$this, 'adminConfiguration'])
             ->method('GET|POST')
             ->before(function () use ($firewall) {
                 $firewall->requireAccessToModule('admin');
@@ -249,7 +243,8 @@ class ServiceProvider implements PluginProviderInterface
             return $app->redirectPath('admin_plugins_list');
         }
 
-        return $app['twig']->render('phraseanet-plugin-skeleton/admin/skeleton_configuration.html.twig', [
+        return $app['twig']->render(self::NAME .  '/admin/configuration.html.twig', [
+            'form_action' => '/' . self::NAME . '/configuration',
             'form' => $form->createView()
         ]);
     }
@@ -280,7 +275,11 @@ class ServiceProvider implements PluginProviderInterface
         ];
 
         $app['skeleton.configuration_tabs.configuration'] = $app->share(function (PhraseaApplication $app) {
-            return new ConfigurationTab($app['url_generator']);
+            /** @var UrlGeneratorInterface $urlGeneraton */
+            $urlGenerator = $app['url_generator'];
+            return new ConfigurationTab(
+                $urlGenerator->generate('skeleton_admin_configuration')
+            );
         });
     }
 

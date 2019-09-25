@@ -8,15 +8,11 @@ use Twig_Environment;
 
 class ActionBarPlugin implements ActionBarPluginInterface
 {
-    // private $assetsNamespace;
     private $pluginName;
-    // private $pluginLocale;
 
-    public function __construct($pluginName) //, $assetsNamespace, $pluginLocale)
+    public function __construct($pluginName)
     {
-        // $this->assetsNamespace = $assetsNamespace;
         $this->pluginName = $pluginName;
-        // $this->pluginLocale = $pluginLocale;
     }
 
     public function getActionBar()
@@ -41,7 +37,6 @@ class ActionBarPlugin implements ActionBarPluginInterface
 
     public function getAssetsNamespace()
     {
-        // return $this->assetsNamespace;
         return $this->pluginName;
     }
 
@@ -52,7 +47,6 @@ class ActionBarPlugin implements ActionBarPluginInterface
 
     public function getPluginLocale()
     {
-        // return $this->pluginLocale;
         return $this->pluginName;
     }
 

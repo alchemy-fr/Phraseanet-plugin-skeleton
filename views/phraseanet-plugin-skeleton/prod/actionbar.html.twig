@@ -1,4 +1,4 @@
-{% set config = app['phraseanet-plugin-skeleton.config'].skeleton %}
+{% set config = app[plugin.getPluginName() ~ '.config'].skeleton %}
 {% set requestor = app.getAuthenticatedUser().getLogin() %}
 
 {#
@@ -12,7 +12,9 @@
     console.log("assetsNamespace:", "{{ plugin.assetsNamespace }}");
     console.log("pluginName:", "{{ plugin.getPluginName() }}");
     console.log("pluginLocale:", "{{ plugin.getPluginLocale() }}");
+
     // add a <script> to load actionbar.js
+    //
     (function(window, document, scriptEl, scriptUrl, pluginName, script, firstScript) {
         // var config = {{ config|json_encode|raw }};      // unused
         window[pluginName] = window[pluginName] || function() {
@@ -24,9 +26,10 @@
         script.src = scriptUrl;
         firstScript.parentNode.insertBefore(script, firstScript)
 
-    })(window, document, 'script', '{{ plugin_asset('phraseanet-plugin-skeleton', 'js/actionbar.js') }}', 'skeleton');
+    })(window, document, 'script', '{{ plugin_asset(plugin.assetsNamespace, 'js/actionbar.js') }}', 'skeleton');
 
     // add a <link> to load actionbar.css
+    //
     (function(window, document, styleEl, styleUrl) {
 
         var style = document.createElement(styleEl),
@@ -37,6 +40,6 @@
         style.media = 'all';
         head.appendChild(style);
 
-    })(window, document, 'link', '{{ plugin_asset('phraseanet-plugin-skeleton', 'css/actionbar.css') }}');
+    })(window, document, 'link', '{{ plugin_asset(plugin.assetsNamespace, 'css/actionbar.css') }}');
 
 </script>

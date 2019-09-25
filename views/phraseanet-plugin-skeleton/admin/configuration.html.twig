@@ -1,0 +1,22 @@
+<h3> Configuration Skeleton</h3>
+
+{{ form_start(form, {'action': form_action}) }}
+
+<div class="control-group">
+    {{ form_row(form.text_setting) }}
+</div>
+
+<div class="control-group">
+    {{ form_row(form.int_setting) }}
+</div>
+
+<div class="control-group">
+    {{ form_row(form.textarea_setting) }}
+</div>
+
+<div class="control-group">
+    <input type="submit" class="btn btn-primary" value={{ "Save"|trans }} />
+</div>
+
+
+{{ form_end(form) }}

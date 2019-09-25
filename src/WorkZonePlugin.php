@@ -11,15 +11,11 @@ namespace Alchemy\SkeletonPlugin;
 
 class WorkZonePlugin
 {
-    // private $assetsNamespace;
     private $pluginName;
-    // private $pluginLocale;
 
-    public function __construct($pluginName) // , $assetsNamespace, $pluginLocale)
+    public function __construct($pluginName)
     {
-        // $this->assetsNamespace = $assetsNamespace;
         $this->pluginName = $pluginName;
-        // $this->pluginLocale = $pluginLocale;
     }
 
     public function getWorkzoneTemplate()
