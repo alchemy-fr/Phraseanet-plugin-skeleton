@@ -36,7 +36,6 @@ class ConfigurationType extends AbstractType
 
     public function getName()
     {
-        // return 'skeleton_configuration';
         return 'configuration';
     }
 }

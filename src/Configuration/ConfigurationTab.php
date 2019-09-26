@@ -3,7 +3,6 @@
 namespace Alchemy\SkeletonPlugin\Configuration;
 
 use Alchemy\Phrasea\Plugin\ConfigurationTabInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Class ConfigurationTab

@@ -5,7 +5,6 @@ namespace Alchemy\SkeletonPlugin\Security;
 use Alchemy\Phrasea\Authorization\BaseVoter;
 use Alchemy\Phrasea\Model\Entities\User;
 use Alchemy\Phrasea\Model\Repositories\UserRepository;
-use Silex\Application;
 
 class PluginVoter extends BaseVoter
 {
