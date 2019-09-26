@@ -1,0 +1,4 @@
+configuration:
+  text_setting: 'this is text value'
+  int_setting: 6
+  textarea_setting: 'this is textarea value'
