@@ -9,40 +9,5 @@
 {% block plugin_workzone_content %}
     <div id="skeleton-plugin-workzone-layout" class="skeleton-plugin"></div>
     <script>
-        /*
-        (function(window, document, scriptEl, scriptUrl, pluginName, script, firstScript) {
-            window[pluginName] = window[pluginName] || function() {
-                (window[pluginName].q = window[pluginName].q || []).push(arguments);
-            };
-            script = document.createElement(scriptEl);
-            firstScript = document.getElementsByTagName(scriptEl)[0];
-            script.async = 1;
-            script.src = scriptUrl;
-            firstScript.parentNode.insertBefore(script, firstScript)
-
-        })(window, document, 'script', '{{ plugin_asset('skeleton', 'pluginProd.js') }}', 'skeleton');
-
-
-        (function(window, document, styleEl, styleUrl) {
-
-            var style = document.createElement(styleEl),
-                head = document.getElementsByTagName('head')[0];
-            style.href = styleUrl;
-            style.rel = 'stylesheet';
-            style.type = 'text/css';
-            style.media = 'all';
-            head.appendChild(style);
-
-        })(window, document, 'link', '{{ plugin_asset('skeleton', 'pluginProd.css') }}');
-
-        wgPlugin('initialize', {
-            pluginId: '{{ plugin_id }}',
-            api: {
-                baseUrl: '{{ app['request'].getUriForPath('/web-gallery') }}'
-            },
-            oembedUrl: '{{ url('alchemy_embed_oembed') }}'
-        });
-        */
-        console.log("hello 666")
     </script>
 {% endblock plugin_workzone_content %}

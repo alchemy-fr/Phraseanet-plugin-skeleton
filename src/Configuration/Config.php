@@ -3,13 +3,13 @@
 namespace Alchemy\SkeletonPlugin\Configuration;
 
 use Symfony\Component\Yaml\Yaml;
+use Alchemy\SkeletonPlugin\ServiceProvider;
 
 class Config
 {
     public static function getConfigFilename()
     {
-        $manifest_name = json_decode(file_get_contents(realpath(dirname(__FILE__)) . "/../../manifest.json"))->name;
-        $config_dir = realpath(dirname(__FILE__) . "/../../../../config") . "/plugins/" . $manifest_name;
+        $config_dir = realpath(dirname(__FILE__) . "/../../../../config") . "/plugins/" . ServiceProvider::NAME;
 
         if (!is_dir($config_dir)) {
             mkdir($config_dir);
@@ -40,7 +40,7 @@ class Config
 
     public static function setConfiguration(array $config)
     {
-        $content = Yaml::dump(['skeleton' => $config]);
+        $content = Yaml::dump(['configuration' => $config]);
 
         file_put_contents(self::getConfigFilename(), $content);
     }

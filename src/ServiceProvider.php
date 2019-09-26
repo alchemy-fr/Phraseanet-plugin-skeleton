@@ -132,7 +132,7 @@ class ServiceProvider implements PluginProviderInterface
             ->before(function () use ($firewall) {
                 $firewall->requireAccessToModule('admin');
             })
-            ->bind('skeleton_admin_configuration');
+            ->bind(self::NAME . '_admin_configuration');
     }
 
     /**
@@ -148,7 +148,7 @@ class ServiceProvider implements PluginProviderInterface
                 self::VERSION,
                 '',
                 self::NAME, // text-domain
-                $app['skeleton.configuration_tabs']
+                $app[self::NAME . '.configuration_tabs']
             );
         });
     }
@@ -216,7 +216,7 @@ class ServiceProvider implements PluginProviderInterface
         }
 
         return $app['twig']->render('prod/skeleton_dialog_2.html.twig', [
-            'text_domain'      => self::NAME,   // text-domain
+            'plugin'           => $app[self::NAME . '.workzone.basket.actionbar'],
             'dialog_level'     => $request->get('dialog_level'),
             'records'          => $records,
             'flattenedRecords' => $flattenedRecords,
@@ -233,7 +233,7 @@ class ServiceProvider implements PluginProviderInterface
     {
         $config = Config::getConfiguration();
 
-        $form = $app->form(new ConfigurationType(), $config['skeleton']);
+        $form = $app->form(new ConfigurationType(), $config['configuration']);
 
         $form->handleRequest($request);
 
@@ -243,8 +243,10 @@ class ServiceProvider implements PluginProviderInterface
             return $app->redirectPath('admin_plugins_list');
         }
 
+        /** @var UrlGeneratorInterface $urlGeneraton */
+        $urlGenerator = $app['url_generator'];
         return $app['twig']->render(self::NAME .  '/admin/configuration.html.twig', [
-            'form_action' => '/' . self::NAME . '/configuration',
+            'form_action' => $urlGenerator->generate(self::NAME . '_admin_configuration'), // '/' . self::NAME . '/configuration',
             'form' => $form->createView()
         ]);
     }
@@ -270,15 +272,15 @@ class ServiceProvider implements PluginProviderInterface
      */
     private function registerConfigurationTabs(Application $app)
     {
-        $app['skeleton.configuration_tabs'] = [
-            'configuration' => 'skeleton.configuration_tabs.configuration',
+        $app[self::NAME . '.configuration_tabs'] = [
+            'configuration' => self::NAME . '.configuration_tabs.configuration',
         ];
 
-        $app['skeleton.configuration_tabs.configuration'] = $app->share(function (PhraseaApplication $app) {
+        $app[self::NAME . '.configuration_tabs.configuration'] = $app->share(function (PhraseaApplication $app) {
             /** @var UrlGeneratorInterface $urlGeneraton */
             $urlGenerator = $app['url_generator'];
             return new ConfigurationTab(
-                $urlGenerator->generate('skeleton_admin_configuration')
+                $urlGenerator->generate(self::NAME . '_admin_configuration')
             );
         });
     }

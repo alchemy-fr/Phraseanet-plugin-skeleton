@@ -1,10 +1,10 @@
 {% if basketName is not null %}
-    <h3>{{ 'basket_selected'|trans({'%basketName%': basketName}, text_domain) }} </h3>
+    <h3>{{ 'basket_selected'|trans({'%basketName%': basketName}, plugin.getPluginLocale()) }} </h3>
 {% elseif records is not empty %}
-    <h3>{{ 'document_selected'|transchoice(records.count, [], text_domain) }}</h3>
+    <h3>{{ 'document_selected'|transchoice(records.count, [], plugin.getPluginLocale()) }}</h3>
 {% endif %}
 
-<h2>{{ 'flattened_records'|transchoice(flattenedRecords|length, [], text_domain) }}</h2>
+<h2>{{ 'flattened_records'|transchoice(flattenedRecords|length, [], plugin.getPluginLocale()) }}</h2>
 
 <br/>
 <br/>
@@ -14,12 +14,12 @@
 
 {% if dialog_level > 0 %}    {# only for phraseanet 4.1 #}
 <button class="btn btn-inverse SKELETON_close_btn" type="button">
-    {{ 'close'|trans({}, text_domain) }}
+    {{ 'close'|trans({}, plugin.getPluginLocale()) }}
 </button>
 {% endif %}
 
 
-{% set config = app['phraseanet-plugin-skeleton.config'].skeleton %}
+{% set config = app[plugin.getPluginName() ~ '.config'].configuration %}
 {% set requestor = app.getAuthenticatedUser().getLogin() %}
 
 {% if dialog_level > 0 %}    {# only for phraseanet 4.1 #}

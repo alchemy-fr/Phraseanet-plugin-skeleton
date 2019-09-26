@@ -1,4 +1,4 @@
-{% set config = app[plugin.getPluginName() ~ '.config'].skeleton %}
+{% set config = app[plugin.getPluginName() ~ '.config'].configuration %}
 {% set requestor = app.getAuthenticatedUser().getLogin() %}
 
 {#

@@ -31,7 +31,6 @@ class BasketActionBarPlugin implements BasketActionBarPluginInterface
 
     public function getPluginLocale()
     {
-        // return $this->pluginLocale;
         return $this->pluginName;
     }
 }
