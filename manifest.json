@@ -1,15 +1,15 @@
 {
-    "name": "template-plugin",
-    "description" : "A template plugin for manipulating records",
-    "keywords"    : ["template", "records", "action","sketeton"],
+    "name": "phraseanet-plugin-skeleton",
+    "description" : "Phraseanet Skeleton Plugin",
+    "keywords"    : ["skeleton", "plugin", "phraseanet"],
     "license"     : "MIT",
-    "version"     : "4.0.0",
-    "minimum-phraseanet-version": "3.9",
-    "maximum-phraseanet-version": "4.0.100",
+    "version"     : "2.0.0",
+    "minimum-phraseanet-version": "4.0",
+    "maximum-phraseanet-version": "5.0",
     "twig-paths": ["views"],
     "services" : [
         {
-            "class": "Alchemy\\PluginServiceProvider"
+            "class": "Alchemy\\SkeletonPlugin\\ServiceProvider"
         }
     ]
 }
