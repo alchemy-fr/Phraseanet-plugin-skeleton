@@ -7,7 +7,6 @@
         if ($target !== undefined) {
             if ($target.hasClass('results_window')) {
                 if (window.p4.Results) {
-                    console.log("got results");
                     recordIdList = window.p4.Results.Selection.get();
                 }
 
@@ -18,7 +17,6 @@
             }
             else if ($target.hasClass('basket_window')) {
                 if (window.p4.WorkZone) {
-                    console.log("got basket");
                     recordIdList = window.p4.WorkZone.Selection.get();
                 }
                 else {

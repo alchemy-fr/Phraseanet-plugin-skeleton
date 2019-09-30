@@ -53,7 +53,6 @@
                     targetDiv.empty().html(response);
                     contentsDownloaded[e.target.hash] = true;
                 }, function(error) {
-                    console.log(error);
                     targetDiv.empty().html('<i class="icon-fire">{{ 'admin::plugins: retrieveConfigurationError'|trans }}</i>');
                 });
             }
