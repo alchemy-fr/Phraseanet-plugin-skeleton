@@ -50,6 +50,11 @@ class ActionBarPlugin implements ActionBarPluginInterface
         return $this->pluginLocale;
     }
 
+    public function getActionbarTemplate()
+    {
+        return sprintf('%s/prod/toolbar.html.twig', $this->pluginName);
+    }
+    
     public function getJS()
     {
         return $this->twig->render('phraseanet-plugin-skeleton/prod/toolbar.html.twig', []);
